@@ -859,13 +859,13 @@ class CharmmParameterSet(ParameterSet):
                                     tpatches[resname] = val
                         elif line[:5].upper() == 'DELETE':
                             words = line.split()
-                            #entity_type = words[1].upper()
-                            #name = words[2].upper()
-                            #if entity_type == 'ATOM':
-                            #    res.delete_atoms.append(name)
-                            #elif entity_type == 'IMPR':
-                            #    res.delete_impropers.append(words[2:5])
-                            #else:
+                            entity_type = words[1].upper()
+                            name = words[2].upper()
+                            if entity_type == 'ATOM':
+                                res.delete_atoms.append(name)
+                            elif entity_type == 'IMPR':
+                                res.delete_impropers.append(words[2:5])
+                            else:
                                 pass
                             # NOTE: We don't handle BOND (not used by c36 files),
                             # ANGL, DIHE, IMPR, DONO, ACCE
