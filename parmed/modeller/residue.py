@@ -223,6 +223,10 @@ class ResidueTemplate(object):
             self._crd = np.array([[a.xx, a.xy, a.xz] for a in self])
         return self._crd
 
+    @property
+    def net_charge(self):
+        return sum([a.charge for a in self])
+
     # Make ResidueTemplate look like a container of atoms, also indexable by the
     # atom name
     def __len__(self):
@@ -310,7 +314,7 @@ class ResidueTemplate(object):
         """
         if not self.atoms:
             raise ValueError('Cannot fix charges on an empty residue')
-        net_charge = sum(a.charge for a in self.atoms)
+        net_charge = self.net_charge
         if to is None:
             to = round(net_charge)
         else:
@@ -524,6 +528,7 @@ class PatchTemplate(ResidueTemplate):
 
     Attributes
     ----------
+    target_net_charge:
     delete : list of str
         List of atoms that need to be deleted in applying the patch
 
@@ -539,8 +544,9 @@ class PatchTemplate(ResidueTemplate):
     """
     def __init__(self, name=''):
         super(PatchTemplate, self).__init__(name)
-        self.delete = []
-
+        self.delete_atoms = []
+        self.delete_impropers = []
+        
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 class ResidueTemplateContainer(list):

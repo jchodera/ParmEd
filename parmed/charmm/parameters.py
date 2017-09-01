@@ -854,7 +854,17 @@ class CharmmParameterSet(ParameterSet):
                                 elif tok.upper().startswith('LAST'):
                                     tpatches[resname] = val
                         elif line[:5].upper() == 'DELETE':
-                            pass
+                            words = line.split()
+                            entity_type = words[1].upper()
+                            name = words[2].upper()
+                            if entity_type == 'ATOM':
+                                res.delete_atoms.append(name)
+                            elif entity_type == 'IMPR':
+                                res.delete_impropers.append(words[2:5])
+                            else:
+                                pass
+                            # NOTE: We don't handle BOND (not used by c36 files),
+                            # ANGL, DIHE, IMPR, DONO, ACCE
                         elif line[:4].upper() == 'IMPR':
                             it = iter([w.upper() for w in line.split()[1:]])
                             for a1, a2, a3, a4 in zip(it, it, it, it):
