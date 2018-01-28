@@ -457,7 +457,7 @@ class ResidueTemplate(object):
         residue = _copy.copy(self)
         # Record whether we've actually modified the residue.
         modifications_made = False
-        # Delete atoms
+        # Delete atoms and any associated bonds or external bonds
         for atom_name in patch.delete_atoms:
             try:
                 residue.delete_atom(atom_name)

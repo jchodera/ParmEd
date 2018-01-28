@@ -586,6 +586,10 @@ class OpenMMParameterSet(ParameterSet):
                 etree.SubElement(patch_xml, 'RemoveExternalBond', atomName=residue.head.name)
             if (residue.tail is not None) and (patched_residue.tail is None):
                 etree.SubElement(patch_xml, 'RemoveExternalBond', atomName=residue.tail.name)
+            # DEBUG
+            if (patch.name == 'CTER'):
+                print('residue: {}'.format(residue))
+                print('patched_residue: {}'.format(patched_residue))
 
             if (residue.head is None) and (patched_residue.head is not None):
                 etree.SubElement(patch_xml, 'AddExternalBond', atomName=patched_residue.head.name)
