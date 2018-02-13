@@ -626,8 +626,12 @@ class OpenMMParameterSet(ParameterSet):
 
             # DEBUG
             if (patch.name == 'CTER'):
+                print('*******************************************')
+                print('CTER:')
+                print('valid_residues_for_patch: %s' % valid_residues_for_patch['CTER'])
                 print('residue: {}'.format(residue))
                 print('patched_residue: {}'.format(patched_residue))
+                print('*******************************************')
 
             if write_apply_to_residue:
                 for residue_name in valid_residues_for_patch[patch.name]:
