@@ -386,8 +386,8 @@ class OpenMMParameterSet(ParameterSet):
                                     MATCH = True
                                     key_placeholder = key
                                     improper_periodic[altkeys1] = self.improper_periodic_types[key]
-                        elif not MATCH:
-                            warnings.warn("No improper parameter found for {}".format(altkeys1), ParameterWarning)
+                if not MATCH:
+                    warnings.warn("No improper parameter found for {}".format(altkeys1), ParameterWarning)
         self.improper_periodic_types = improper_periodic
         self.improper_types = improper_harmonic
 
